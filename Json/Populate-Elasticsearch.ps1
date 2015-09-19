@@ -47,7 +47,7 @@ ForEach ($model in $models) {
     $entity = $(Resolve-Path $_.FullName -Relative).Substring(2).Replace("\", "/").Replace(".json", "")
     $indexUri = $uri + ($entity[0].ToString().ToLowerInvariant() + $entity.Substring(1))
     Write-Host $("Populating " + $indexUri)
-    $parsedDoc = Get-Content $_.FullName -Encoding UTF8 | ConvertFrom-Json
+    $parsedDoc = Get-Content $_.FullName -Raw -Encoding UTF8 | ConvertFrom-Json
 
     ForEach ($domainDoc in $parsedDoc) {
       $body = ConvertTo-Json $domainDoc -Depth 20
